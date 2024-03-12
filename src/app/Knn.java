@@ -50,6 +50,22 @@ public class Knn {
 
     }
 
+    public class DistanciaPonto implements Comparable<DistanciaPonto>{
+        private DataPoint dataPoint;
+        private double distancia;
+
+        public DistanciaPonto(DataPoint dataPoint, double distancia){
+            this.distancia = distancia;
+            this.dataPoint = dataPoint;
+        }
+
+        public int compareTo(DistanciaPonto o) {
+            return Double.compare(o.distancia, this.distancia);
+        }
+    }
+
 }
+
+
 
 
