@@ -5,7 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLOutput;
-import java.util.LinkedList;
+import java.util.*;
 
 
 public class Knn {
@@ -24,19 +24,25 @@ public class Knn {
         double distanciaMaisProx = Double.MAX_VALUE;
         double distanciaAux;
 
-        for(int i = 0; i < dataPoints.size(); i ++){
-            distanciaAux = calcularDistancia(attributes, dataPoints.get(i));
+        List<DistanciaPonto> listDistancias = new LinkedList<DistanciaPonto>();
 
-            if(distanciaAux < distanciaMaisProx){
-                distanciaMaisProx = distanciaAux;
-                dataPointMaisProx = dataPoints.get(i);
-
-            }
-
+        for(DataPoint dataPoint:dataPoints){
+            distanciaAux = calcularDistancia(attributes, dataPoint);
+            listDistancias.add(new DistanciaPonto(dataPoint, distanciaAux));
         }
 
+        listDistancias.sort(Comparator.reverseOrder());
+
+        Map<String, Integer> mapFrequencia = new HashMap<>();
+        listDistancias = listDistancias.stream().limit(this.k).toList();
+        for (DistanciaPonto distanciaPonto:listDistancias) {
+            mapFrequencia.put(distanciaPonto.dataPoint.getEstado(), mapFrequencia.getOrDefault(distanciaPonto.dataPoint.getEstado(), 0) + 1);
+        }
+
+        String maisFrequente = mapFrequencia.keySet().stream().max((estado1, estado2) -> Integer.compare(mapFrequencia.get(estado1), mapFrequencia.get(estado2))).get();
+
         // Retorna a classe prevista para o ponto de dados fornecido
-        return dataPointMaisProx.getEstado();
+        return maisFrequente;
     }
 
     public String determineHappiness(double horaSono, double caloria) {

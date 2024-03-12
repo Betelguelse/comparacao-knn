@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Dataset dataset = new Dataset("feliz.csv");
 
-        dataset.getDataPoints();
-
+        Knn knn = new Knn(dataset, 3);
+        System.out.println(knn.classify(new DataPoint(1500, 2)));
     }
 
 }
