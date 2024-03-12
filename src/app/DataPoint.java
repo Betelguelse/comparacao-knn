@@ -5,27 +5,27 @@ public class DataPoint{
     private double hora;
     private String estado;
 
+
     public double getCaloria() {
         return caloria;
-    }
-
-    public void setCaloria(double caloria) {
-        this.caloria = caloria;
     }
 
     public double getHora() {
         return hora;
     }
 
-    public void setHora(double hora) {
-        this.hora = hora;
-    }
-
     public String getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public DataPoint(double caloria, double hora, String estado){
         this.estado = estado;
+        this.hora = hora;
+        this.caloria = caloria;
+    }
+
+    public DataPoint(double caloria, double hora){
+        this.caloria = caloria;
+        this.hora = hora;
     }
 }
