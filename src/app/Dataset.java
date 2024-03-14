@@ -15,10 +15,10 @@ public class Dataset {
         return dataPoints;
     }
 
-    public Dataset(String filename) {
+    public Dataset() {
         // Implementar construtor
         this.dataPoints = new LinkedList<>();
-        this.loadDataFromCSV(filename);
+        this.loadDataFromCSV("feliz.csv");
     }
 
     public void loadDataFromCSV(String filename) {
