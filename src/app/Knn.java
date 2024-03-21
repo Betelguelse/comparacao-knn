@@ -51,8 +51,9 @@ public class Knn {
     }
 
     public double calcularDistancia(DataPoint dataPoint1, DataPoint dataPoint2){
-        return Math.sqrt(Math.abs(dataPoint2.getCaloria() / 3000 - dataPoint1.getCaloria() / 3000)
-                        + Math.abs(dataPoint1.getHora() / 3000 - dataPoint2.getHora()/3000));
+        return Math.sqrt(
+                Math.pow(Math.abs(dataPoint2.getCaloria() / 3000.0 - dataPoint1.getCaloria() / 3000.0), 2)
+                + Math.pow(Math.abs(dataPoint1.getHora() / 10.0 - dataPoint2.getHora()/ 10.0), 2));
 
     }
 
